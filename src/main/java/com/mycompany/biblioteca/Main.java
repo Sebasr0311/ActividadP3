@@ -15,7 +15,7 @@ public class Main {
     private static void crearCliente() {
         System.out.println("\n--- CREAR CLIENTE ---");
         String id = leerTexto("ID del cliente: ");
-        if (existeCliente(id)) {
+        if (buscarCliente(id) != null) {
             System.out.println("Ya existe un cliente con el ID " + id + ".");
             return;
         }
@@ -25,13 +25,24 @@ public class Main {
         System.out.println("Cliente creado correctamente.");
     }
 
-    private static boolean existeCliente(String id) {
+    private static void listarClientes() {
+        System.out.println("\n--- LISTA DE CLIENTES ---");
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados.");
+            return;
+        }
+        for (int i = 0; i < clientes.size(); i++) {
+            System.out.println((i + 1) + ". " + clientes.get(i));
+        }
+    }
+
+    private static Cliente buscarCliente(String id) {
         for (Cliente cliente : clientes) {
             if (cliente.getId().equalsIgnoreCase(id)) {
-                return true;
+                return cliente;
             }
         }
-        return false;
+        return null;
     }
 
     private static String leerTexto(String mensaje) {
