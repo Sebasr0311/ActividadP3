@@ -1,0 +1,17 @@
+# Maven
+target/
+*.class
+
+# NetBeans
+nbproject/
+nbproject/private/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Logs y sistema
+*.log
+.DS_Store
+Thumbs.db
