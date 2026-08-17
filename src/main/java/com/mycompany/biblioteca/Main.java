@@ -45,6 +45,17 @@ public class Main {
         return null;
     }
 
+    private static void buscarClienteInteractivo() {
+        System.out.println("\n--- BUSCAR CLIENTE ---");
+        String id = leerTexto("ID del cliente a buscar: ");
+        Cliente cliente = buscarCliente(id);
+        if (cliente == null) {
+            System.out.println("No se encontro un cliente con ID " + id + ".");
+        } else {
+            System.out.println("Cliente encontrado: " + cliente);
+        }
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
