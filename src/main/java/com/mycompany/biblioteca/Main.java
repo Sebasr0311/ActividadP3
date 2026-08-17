@@ -7,6 +7,7 @@ public class Main {
 
     static final Scanner scanner = new Scanner(System.in);
     static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Libro> libros = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Sistema de gestion de biblioteca - en construccion");
@@ -81,6 +82,28 @@ public class Main {
         }
         clientes.remove(cliente);
         System.out.println("Cliente eliminado correctamente.");
+    }
+
+    private static void crearLibro() {
+        System.out.println("\n--- CREAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro: ");
+        if (existeLibro(codigo)) {
+            System.out.println("Ya existe un libro con el codigo " + codigo + ".");
+            return;
+        }
+        String titulo = leerTexto("Titulo: ");
+        String autor = leerTexto("Autor: ");
+        libros.add(new Libro(codigo, titulo, autor));
+        System.out.println("Libro creado correctamente.");
+    }
+
+    private static boolean existeLibro(String codigo) {
+        for (Libro libro : libros) {
+            if (libro.getCodigo().equalsIgnoreCase(codigo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String leerTexto(String mensaje) {
