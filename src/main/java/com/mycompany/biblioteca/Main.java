@@ -177,6 +177,32 @@ public class Main {
         return false;
     }
 
+    private static void devolucion() {
+        System.out.println("\n--- REGISTRAR DEVOLUCION ---");
+        String idCliente = leerTexto("ID del cliente: ");
+        Cliente cliente = buscarCliente(idCliente);
+        if (cliente == null) {
+            System.out.println("No existe un cliente con ID " + idCliente + ".");
+            return;
+        }
+        String codigoLibro = leerTexto("Codigo del libro: ");
+        Libro libro = buscarLibro(codigoLibro);
+        if (libro == null) {
+            System.out.println("No existe un libro con codigo " + codigoLibro + ".");
+            return;
+        }
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.getCliente().getId().equalsIgnoreCase(idCliente)
+                    && prestamo.getLibro().getCodigo().equalsIgnoreCase(codigoLibro)
+                    && prestamo.estaActivo()) {
+                prestamo.registrarDevolucion();
+                System.out.println("Devolucion registrada correctamente.");
+                return;
+            }
+        }
+        System.out.println("No existe un prestamo activo para ese cliente y libro.");
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
