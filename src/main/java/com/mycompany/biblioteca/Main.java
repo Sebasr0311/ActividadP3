@@ -28,11 +28,13 @@ public class Main {
                 case 4:
                     System.out.println("Saliendo del sistema. ¡Hasta pronto!");
                     break;
+                case -1:
+                    break;
                 default:
                     System.out.println("Opción no válida.");
                     break;
             }
-        } while (opcion != 4);
+        } while (opcion != 4 && opcion != -1);
     }
 
     private static void mostrarMenuPrincipal() {
@@ -161,12 +163,16 @@ public class Main {
                 } else {
                     System.out.print("Opción inválida. Intente de nuevo: ");
                 }
-            } else {
+            } else if (scanner.hasNext()) {
                 System.out.print("Entrada inválida. Ingrese un número: ");
                 scanner.next();
+            } else {
+                return -1;
             }
         }
-        scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
         return opcion;
     }
 
