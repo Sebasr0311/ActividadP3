@@ -7,6 +7,7 @@ public class Main {
 
     static final Scanner scanner = new Scanner(System.in);
     static ArrayList<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Libro> libros = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Sistema de gestion de biblioteca - en construccion");
@@ -81,6 +82,66 @@ public class Main {
         }
         clientes.remove(cliente);
         System.out.println("Cliente eliminado correctamente.");
+    }
+
+    private static void crearLibro() {
+        System.out.println("\n--- CREAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro: ");
+        if (buscarLibro(codigo) != null) {
+            System.out.println("Ya existe un libro con el codigo " + codigo + ".");
+            return;
+        }
+        String titulo = leerTexto("Titulo: ");
+        String autor = leerTexto("Autor: ");
+        libros.add(new Libro(codigo, titulo, autor));
+        System.out.println("Libro creado correctamente.");
+    }
+
+    private static Libro buscarLibro(String codigo) {
+        for (Libro libro : libros) {
+            if (libro.getCodigo().equalsIgnoreCase(codigo)) {
+                return libro;
+            }
+        }
+        return null;
+    }
+
+    private static void listarLibros() {
+        System.out.println("\n--- LISTA DE LIBROS ---");
+        if (libros.isEmpty()) {
+            System.out.println("No hay libros registrados.");
+            return;
+        }
+        for (int i = 0; i < libros.size(); i++) {
+            System.out.println((i + 1) + ". " + libros.get(i));
+        }
+    }
+
+    private static void actualizarLibro() {
+        System.out.println("\n--- ACTUALIZAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro a actualizar: ");
+        Libro libro = buscarLibro(codigo);
+        if (libro == null) {
+            System.out.println("No se encontro un libro con codigo " + codigo + ".");
+            return;
+        }
+        String titulo = leerTexto("Nuevo titulo (actual: " + libro.getTitulo() + "): ");
+        String autor = leerTexto("Nuevo autor (actual: " + libro.getAutor() + "): ");
+        libro.setTitulo(titulo);
+        libro.setAutor(autor);
+        System.out.println("Libro actualizado correctamente.");
+    }
+
+    private static void eliminarLibro() {
+        System.out.println("\n--- ELIMINAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro a eliminar: ");
+        Libro libro = buscarLibro(codigo);
+        if (libro == null) {
+            System.out.println("No se encontro un libro con codigo " + codigo + ".");
+            return;
+        }
+        libros.remove(libro);
+        System.out.println("Libro eliminado correctamente.");
     }
 
     private static String leerTexto(String mensaje) {
