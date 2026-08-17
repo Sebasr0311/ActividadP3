@@ -117,6 +117,21 @@ public class Main {
         }
     }
 
+    private static void actualizarLibro() {
+        System.out.println("\n--- ACTUALIZAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro a actualizar: ");
+        Libro libro = buscarLibro(codigo);
+        if (libro == null) {
+            System.out.println("No se encontro un libro con codigo " + codigo + ".");
+            return;
+        }
+        String titulo = leerTexto("Nuevo titulo (actual: " + libro.getTitulo() + "): ");
+        String autor = leerTexto("Nuevo autor (actual: " + libro.getAutor() + "): ");
+        libro.setTitulo(titulo);
+        libro.setAutor(autor);
+        System.out.println("Libro actualizado correctamente.");
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
