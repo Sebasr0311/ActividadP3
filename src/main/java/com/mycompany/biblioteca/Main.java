@@ -8,6 +8,7 @@ public class Main {
     static final Scanner scanner = new Scanner(System.in);
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static ArrayList<Libro> libros = new ArrayList<>();
+    static ArrayList<Prestamo> prestamos = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Sistema de gestion de biblioteca - en construccion");
@@ -142,6 +143,38 @@ public class Main {
         }
         libros.remove(libro);
         System.out.println("Libro eliminado correctamente.");
+    }
+
+    private static void crearPrestamo() {
+        System.out.println("\n--- REGISTRAR PRESTAMO ---");
+        String idCliente = leerTexto("ID del cliente: ");
+        Cliente cliente = buscarCliente(idCliente);
+        if (cliente == null) {
+            System.out.println("No existe un cliente con ID " + idCliente + ". Prestamo no registrado.");
+            return;
+        }
+        String codigoLibro = leerTexto("Codigo del libro: ");
+        Libro libro = buscarLibro(codigoLibro);
+        if (libro == null) {
+            System.out.println("No existe un libro con codigo " + codigoLibro + ". Prestamo no registrado.");
+            return;
+        }
+        if (libroEstaPrestado(libro)) {
+            System.out.println("El libro con codigo " + codigoLibro + " ya esta prestado.");
+            return;
+        }
+        prestamos.add(new Prestamo(cliente, libro));
+        System.out.println("Prestamo registrado correctamente.");
+    }
+
+    private static boolean libroEstaPrestado(Libro libro) {
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.getLibro().getCodigo().equalsIgnoreCase(libro.getCodigo())
+                    && prestamo.estaActivo()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String leerTexto(String mensaje) {
