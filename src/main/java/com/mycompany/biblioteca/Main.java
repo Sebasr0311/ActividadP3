@@ -106,6 +106,17 @@ public class Main {
         return false;
     }
 
+    private static void listarLibros() {
+        System.out.println("\n--- LISTA DE LIBROS ---");
+        if (libros.isEmpty()) {
+            System.out.println("No hay libros registrados.");
+            return;
+        }
+        for (int i = 0; i < libros.size(); i++) {
+            System.out.println((i + 1) + ". " + libros.get(i));
+        }
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
