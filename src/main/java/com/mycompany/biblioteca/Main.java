@@ -132,6 +132,18 @@ public class Main {
         System.out.println("Libro actualizado correctamente.");
     }
 
+    private static void eliminarLibro() {
+        System.out.println("\n--- ELIMINAR LIBRO ---");
+        String codigo = leerTexto("Codigo del libro a eliminar: ");
+        Libro libro = buscarLibro(codigo);
+        if (libro == null) {
+            System.out.println("No se encontro un libro con codigo " + codigo + ".");
+            return;
+        }
+        libros.remove(libro);
+        System.out.println("Libro eliminado correctamente.");
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
