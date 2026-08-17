@@ -87,7 +87,7 @@ public class Main {
     private static void crearLibro() {
         System.out.println("\n--- CREAR LIBRO ---");
         String codigo = leerTexto("Codigo del libro: ");
-        if (existeLibro(codigo)) {
+        if (buscarLibro(codigo) != null) {
             System.out.println("Ya existe un libro con el codigo " + codigo + ".");
             return;
         }
@@ -97,13 +97,13 @@ public class Main {
         System.out.println("Libro creado correctamente.");
     }
 
-    private static boolean existeLibro(String codigo) {
+    private static Libro buscarLibro(String codigo) {
         for (Libro libro : libros) {
             if (libro.getCodigo().equalsIgnoreCase(codigo)) {
-                return true;
+                return libro;
             }
         }
-        return false;
+        return null;
     }
 
     private static void listarLibros() {
