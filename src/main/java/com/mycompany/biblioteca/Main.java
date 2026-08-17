@@ -203,6 +203,22 @@ public class Main {
         System.out.println("No existe un prestamo activo para ese cliente y libro.");
     }
 
+    private static void listarPrestamos() {
+        System.out.println("\n--- PRESTAMOS ACTIVOS ---");
+        boolean hayActivos = false;
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.estaActivo()) {
+                System.out.println("- Cliente: " + prestamo.getCliente().getNombre()
+                        + " | Libro: " + prestamo.getLibro().getTitulo()
+                        + " | Fecha prestamo: " + prestamo.getFechaPrestamo());
+                hayActivos = true;
+            }
+        }
+        if (!hayActivos) {
+            System.out.println("No hay prestamos activos.");
+        }
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
