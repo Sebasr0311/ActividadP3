@@ -56,6 +56,21 @@ public class Main {
         }
     }
 
+    private static void actualizarCliente() {
+        System.out.println("\n--- ACTUALIZAR CLIENTE ---");
+        String id = leerTexto("ID del cliente a actualizar: ");
+        Cliente cliente = buscarCliente(id);
+        if (cliente == null) {
+            System.out.println("No se encontro un cliente con ID " + id + ".");
+            return;
+        }
+        String nombre = leerTexto("Nuevo nombre (actual: " + cliente.getNombre() + "): ");
+        String telefono = leerTexto("Nuevo telefono (actual: " + cliente.getTelefono() + "): ");
+        cliente.setNombre(nombre);
+        cliente.setTelefono(telefono);
+        System.out.println("Cliente actualizado correctamente.");
+    }
+
     private static String leerTexto(String mensaje) {
         System.out.print(mensaje);
         String texto = scanner.nextLine().trim();
